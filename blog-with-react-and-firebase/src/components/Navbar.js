@@ -7,7 +7,7 @@ import { faHouse, faFilePen, faArrowRightToBracket } from '@fortawesome/free-sol
 
 
 
-const Navbar = () => {
+const Navbar = ({isAuth}) => {
 	return (
 		<nav>
 			<Link to="/">
@@ -18,10 +18,13 @@ const Navbar = () => {
 				<FontAwesomeIcon icon={faFilePen} />
 				Create Post
 			</Link>
-			<Link to="/login">
+			{!isAuth ? (<Link to="/login">
 				<FontAwesomeIcon icon={faArrowRightToBracket} />
 				Login
-			</Link>
+			</Link>) :(<Link to="/logout">
+				<FontAwesomeIcon icon={faArrowRightToBracket} />
+				Logout
+			</Link>)}
 		</nav>
 	);
 }
