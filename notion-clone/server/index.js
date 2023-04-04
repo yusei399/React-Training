@@ -4,6 +4,11 @@ const app = express();
 const PORT = 5050;
 require("dotenv").config();
 
+app.use(express.json());
+app.use("/api/v1", require("./src/v1/routes/auth"));
+
+//localhost:5050/api/v1/register
+
 //DB接続
 try {
 	mongoose.connect(
