@@ -3,9 +3,15 @@ const mongoose = require("mongoose");
 const app = express();
 const PORT = 5050;
 require("dotenv").config();
+const cors = require("cors");
+
+app.use(cors({
+	origin: "http://localhost:3000",
+}));
+
 
 app.use(express.json());
-app.use("/api/v1", require("./src/v1/routes/auth"));
+app.use("/api/v1", require("./src/v1/routes"));
 
 //localhost:5050/api/v1/register
 

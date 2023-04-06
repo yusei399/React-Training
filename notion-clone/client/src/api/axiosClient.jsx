@@ -15,7 +15,7 @@ const axiosClient = axios.create({
 axiosClient.interceptors.request.use(async (config) => {
 	//config.headers['Authorization'] = `Bearer ${token}`;
 	return {
-		config,
+		...config,
 		headers: {
 			'Content-Type': 'application/json',
 			autjorization: `Bearer ${getToken()}`,//リクエストヘッダーにトークンを追加
@@ -25,7 +25,7 @@ axiosClient.interceptors.request.use(async (config) => {
 
 //APIを叩いた後に後処理を行う
 axiosClient.interceptors.response.use((response) => {
-	return response;
+	return response.data;
 },
 (error) => {
 	throw error.response;
