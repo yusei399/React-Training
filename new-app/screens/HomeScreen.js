@@ -30,7 +30,7 @@ export const HomeScreen = ({navigation}) => {
       <FlatList
         data={articles}
         renderItem={({item}) => (
-          <ListItem imageurl={item.urlToImage} title={item.title} auther={item.author} onPress={() => navigation.navigate("Article")}/>
+          <ListItem imageurl={item.urlToImage} title={item.title} auther={item.author} onPress={() => navigation.navigate("Article", {article: item})}/>
         )}
         keyExtractor={(item, index) => index.toString()}
       >
