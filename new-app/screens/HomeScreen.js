@@ -8,7 +8,7 @@ import { Constants } from 'expo-constants';
 
 const URL = "https://newsapi.org/v2/top-headlines?country=jp&category=business&apiKey=cc5ab85463304dfd91b44a63b5b19046" 
 
-export const HomeScreen = () => {
+export const HomeScreen = ({navigation}) => {
   const [articles, setArticles] = useState([]);
 
   const fetchArticles = async () => {
@@ -30,7 +30,7 @@ export const HomeScreen = () => {
       <FlatList
         data={articles}
         renderItem={({item}) => (
-          <ListItem imageurl={item.urlToImage} title={item.title} auther={item.author}/>
+          <ListItem imageurl={item.urlToImage} title={item.title} auther={item.author} onPress={() => navigation.navigate("Article")}/>
         )}
         keyExtractor={(item, index) => index.toString()}
       >

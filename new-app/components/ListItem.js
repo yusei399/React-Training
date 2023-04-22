@@ -7,7 +7,7 @@ import { StyleSheet, Image, View, Text, TouchableOpacity } from 'react-native';
 
 export const  ListItem = (props) => {
   return (
-      <TouchableOpacity style={styles.itemContainer}>
+      <TouchableOpacity style={styles.itemContainer} onPress={props.onPress}>
         <View style={styles.leftContainer}>
           <Image
             style={{ width: 100, height: 100 }}

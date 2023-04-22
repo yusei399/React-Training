@@ -5,7 +5,6 @@ import {LoadingButton} from "@mui/lab";
 import { Link, useNavigate } from "react-router-dom";
 import authApi from "../../api/authApi";
 import { useState } from "react";
-import { set } from "mongoose";
 
 
 const Login = () => {
@@ -41,16 +40,16 @@ const Login = () => {
 			return;
 		}
 		setLoading(true);
-
 		try {
-			const response = await authApi.Login({
+			const response = await authApi.login({
 				username,
 				password,
-				confirmPassword,
+			
 			});
+			console.log(response);
 			setLoading(false);
 			localStorage.setItem('token', response.token);
-			console.log("新規登録に成功しました");
+			console.log("ログインに成功しました");
 			navigate("/");
 		}catch (error) {
 			setLoading(false);

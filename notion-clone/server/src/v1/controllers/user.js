@@ -18,9 +18,12 @@ exports.register = async (req, res) => {
 
 exports.login = async (req, res) => {
 	const {username, password }= req.body;
+	console.log("username", username);
+	console.log("password", password);
 
 	try {
 		const user = await User.findOne({username}).select("password username");
+		console.log("user", user);
 		if(!user) {
 			return res.status(401).json(
 				{
@@ -34,6 +37,8 @@ exports.login = async (req, res) => {
 			process.env.SECRET_KEY
 			).toString(CryptoJS.enc.Utf8);
 		  //パスワード適合チェック
+		console.log("decryptedPassword", decryptedPassword);
+		console.log("password", password);
 		if (decryptedPassword !== password) {
 			res.status(401).json({
 				errors: [
@@ -44,10 +49,13 @@ exports.login = async (req, res) => {
 				],
 			});
 			}
+		user.password = undefined;
 		//JWTトークンを発行
 		const token = JWT.sign({id: user._id}, process.env.TOKEN_SECRET_KEY, {expiresIn: "24h"});
+		console.log("token", token);
 		res.status(200).json({user, token});
 	}catch(error) {
+		console.log("catch_error");
 		return res.status(500).json(error);
 	}
 }
